@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head_title %} Recommended | {{ block.super }} {% endblock head_title %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <!-- Listings -->
+            <div class="col-xs-12 col-sm-8 ">
+                <div class="articlesListing">
+                {% for story in stories %}
+                    <article class="article">
+                        <div class="image">
+                            <a href="" title="#" class="favs">
+                                <i class="fa fa-comments"></i>
+                                <div class="count">{{story.responsecount}}</div>
+                            </a>
+                            <a href="" title="#">
+                                <img src="{% static 'tmp/770x513-1.jpg' %}" alt="#" width="770" height="513" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="box">
+                            <h3 class="title">
+                                <a href="" title="#">{{story.title}}</a>
+                            </h3>
+                            <div class="info">
+                                <div>
+                                    <span class="date">{{story.created_at}}</span>
+                                </div>
+                                <div>by <a href="{% url 'user:profile' story.author.user.username|slugify %}" title="#">{{story.author.user.username}}</a></div>
+                                <div>in
+                                    {% for category in story.category%}
+                                    <a href="#" title="#">#{{category}}</a>
+                                    {% endfor%}
+                                    </div>
+                                <div>3 min read</div>
+                            </div>
+                            <p>
+                                {{story.description}}
+                            </p>
+                            <div class="btns text-center">
+                                <a href="" title="#" class="btn btn-primary"><span>Continue reading</span></a>
+                            </div>
+
+                            <footer class="footer">
+                                <div class="row">
+                                    <div class="col-sm-12 col-lg-6 tags">
+                                        {% for tag in story.tag %}
+                                            <a href="#" title="#"><span class='fa fa-tags icon'> {{tag}} </span></a>
+                                            {% endfor %}
+                                    </div>
+                                    <div class="col-sm-12 col-lg-6 moreInfo">
+                                        <div class="dropdown onHover">
+                                            <div id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" role="menu">
+                                                <i class="fa fa-share-alt"></i> Share
+                                            </div>
+
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
+                                                <li><a href="" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
+                                                <li><a href="" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
+                                                <li><a href="" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
+                                                <li><a href="" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
+                                            </ul>
+                                        </div>
+                                       <div><span><i class="fa fa-comments"></i> {{story.responsecount}}</span> Comments</div>
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    </article>
+                {% endfor %}
+                </div>
+            </div>
+                            <!-- Aside -->
+            <aside class="col-xs-12 col-sm-4 aside">
+                <div class="row">
+
+
+                    <!-- Post slider -->
+                    <div class="col-xs-12 i">
+                            <div class="box postSlider">
+                                <h2>Stories</h2>
+
+                                <div class="asideCarousel js-aside-carousel">
+                                    {% for story in stories%}
+                                        <div class="i">
+                                            <div class="c">
+                                                <article class="article">
+                                                    <a href="{% url 'story:detail' story.title|slugify %}" title="#" class="image">
+                                                        <img src="{% static 'tmp/290x193-1.jpg'%}" alt="#" width="290" height="193" class="img-responsive">
+                                                    </a>
+                                                    <h3 class="title">
+                                                        <a href="{% url 'story:detail' story.title|slugify %}" title="#">{{story.title}}</a>
+                                                    </h3>
+                                                    <div class="info">{{story.created_at|date}}</div>
+                                                    <div class="info">{{story.description}}</div>
+                                                </article>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Socials -->
+                    <div class="col-xs-12 i">
+                        <div class="box socials">
+                            <a href="#" title="#" class="i"><i class="fa fa-twitter"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-facebook"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-linkedin"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-pinterest-p"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-tumblr"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-vimeo-square"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-youtube"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <!-- Subscribe -->
+                    <div class="col-xs-12 i">
+                        <div class="box subscribe signInOutWrap">
+                            <form>
+                                <input type="text" placeholder="Your Email Adress" class="input">
+                                <button class="btn" type="submit"><span>Subscribe</span></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Most popular by -->
+                    <div class="col-xs-12 i">
+                        <div class="box articleMediaList">
+                            <h2>Most popular by</h2>
+
+                            <div class="articlesFilter clearfix js-tabs" role="tablist">
+                                <div class="i">
+                                    <a href="#tags" aria-controls="tags" role="tab" data-toggle="tab" class="active">Tags</a>
+                                </div>
+                                <div class="i">
+                                    <a href="#category" aria-controls="category" role="tab" data-toggle="tab">Categories</a>
+                                </div>
+                            </div>
+
+                            <div class="tab-content bordered">
+                                <!-- Tags -->
+                                <div role="tabpanel" class="tab-pane fade in active" id="tags">
+                                    <div class="tags">
+                                        <div class="c">
+                                            {% for tag in tags%}
+                                                <a href="#" title="#" class="btn btn-color"><span class='fa fa-tags icon'> {{tag}}</span></a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Categories -->
+                                <div role="tabpanel" class="tab-pane fade" id="category">
+                                 <div class="tags">
+                                        <div class="c">
+                                            {% for category in categories%}
+                                                <a href="#" title="#" class="btn btn-color"><span class="fa fa-tags icon"> {{category}}</span></a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </aside>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                        <div class="paginations pagination-numbers">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-3 info i">
+                                    Page {{ stories.number }} of {{ stories.paginator.num_pages }}.
+                                </div>
+                                <div class="col-xs-12 col-md-9 i">
+                                    <nav>
+                                        <ul>
+                                        {% if stories.has_previous %}
+                                            <li class="prev prevnext"><a href="?page={{ stories.previous_page_number }}" title="#"><i class="fa fa-angle-left"></i></a></li>
+                                        {% else %}
+                                            <li class="prev prevnext"><a href="" title="#"><i class="fa fa-angle-left"></i></a></li>
+                                        {% endif %}
+
+                                        {% for pagenum in stories.paginator.page_range %}
+                                            {% if pagenum == stories.number %}
+                                            <li class="hoverExtend active">
+                                            {% else %}
+                                            <li class="hoverExtend">
+                                            {% endif %}
+                                            <a href="?page={{ pagenum }}" title="#">{{pagenum}}</a></li>
+                                        {% endfor %}
+
+                                        {% if stories.has_next %}
+                                            <li class="next prevnext"><a href="?page={{ stories.next_page_number }}" title="#"><i class="fa fa-angle-right"></i></a></li>
+                                        {% else %}
+                                            <li class="next prevnext"><a href="" title="#"><i class="fa fa-angle-right"></i></a></li>
+                                        {% endif %}
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="paginations pagination-prevnext">
+                            <div class="row">
+                                {% if stories.has_previous %}
+                                    <div class="col-xs-4 prev hoverExtend active">
+                                        <a href="?page={{ stories.previous_page_number }}" title="#">Previous</a>
+                                    </div>
+                                {% else %}
+                                    <div class="col-xs-4 prev hoverExtend active">
+                                        <a href="" title="#">Previous</a>
+                                    </div>
+                                {% endif %}
+
+                                <div class="col-xs-4 info hidden-xs">Page {{ stories.number }} of {{ stories.paginator.num_pages }}.</div>
+                                {% if stories.has_next %}
+                                    <div class="col-xs-4 col-xs-offset-4 col-sm-offset-0 next hoverExtend active text-right">
+                                        <a href="?page={{ stories.next_page_number }}" title="#">Next</a>
+                                    </div>
+                                {% else %}
+                                    <div class="col-xs-4 prev hoverExtend active">
+                                        <a href="" title="#">Next</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock main %}

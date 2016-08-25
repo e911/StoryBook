@@ -1,0 +1,372 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head_title %}
+  Profile | {{instance.user.username}}
+{% endblock head_title%}
+
+
+{% block main %}
+
+		<!-- Content -->
+		<div class="container">
+			<div class="row">
+				<!-- Listings -->
+				<div class="col-xs-12 col-sm-8">
+					<div class="articlesListing">
+						{% for story in stories %}
+						<article class="article">
+							<div class="image">
+								<a href="#" title="#" class="favs">
+									<i class="fa fa-comment"></i>
+									<div class="count">{{story.responsecount}}</div>
+								</a>
+								<a href="#" title="#">
+									<img src="{% static 'tmp/770x513-9.jpg'%}" alt="#" width="770" height="513" class="img-responsive">
+								</a>
+							</div>
+							<div class="box">
+								<h3 class="title">
+									<a href="#" title="#">{{story.title}}</a>
+								</h3>
+								<div class="info">
+									<div>
+										<span class="date">{{story.created_at|date}}</span>
+									</div>
+									<div>by <a href="{% url 'user:profile' story.author.user.username|slugify %}" title="#">{{story.author.user.username}}</a></div>
+									<div>in
+									{% for category in story.category%}
+									<a href="#" title="#">#{{category}}</a>
+									{% endfor%}
+									</div>
+									<div>3 min read</div>
+								</div>
+								<p>
+									{{story.description}}
+								</p>
+								<div class="btns text-center">
+									<a href="{% url 'story:detail' story.title|slugify %}" title="#" class="btn btn-primary"><span>Continue reading</span></a>
+								</div>
+
+								<footer class="footer">
+									<div class="row">
+										<div class="col-sm-12 col-lg-6 tags">
+											{% for tag in story.tag %}
+											<a href="#" title="#"><span class='fa fa-tags icon'> {{tag}} </span></a>
+											{% endfor %}
+										</div>
+										<div class="col-sm-12 col-lg-6 moreInfo">
+											<div class="dropdown onHover">
+												<div id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" role="menu">
+													<i class="fa fa-share-alt"></i> Share
+												</div>
+
+												<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+													<li><a href="#" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
+													<li><a href="#" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
+													<li><a href="#" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
+													<li><a href="#" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
+													<li><a href="#" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
+													<li><a href="#" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
+													<li><a href="#" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
+												</ul>
+											</div>
+											<div><span><i class="fa fa-comments"></i> {{story.responsecount}}</span> Comments</div>
+										</div>
+									</div>
+								</footer>
+							</div>
+						</article>
+						{% endfor %}
+
+
+						<div class="paginations pagination-numbers">
+							<div class="row">
+								<div class="col-xs-12 col-md-3 info i">
+									Page {{ stories.number }} of {{ stories.paginator.num_pages }}.
+								</div>
+								<div class="col-xs-12 col-md-9 i">
+									<nav>
+										<ul>
+										{% if stories.has_previous %}
+											<li class="prev prevnext"><a href="?page={{ stories.previous_page_number }}" title="#"><i class="fa fa-angle-left"></i></a></li>
+										{% else %}
+											<li class="prev prevnext"><a href="" title="#"><i class="fa fa-angle-left"></i></a></li>
+										{% endif %}
+
+										{% for pagenum in stories.paginator.page_range %}
+											{% if pagenum == stories.number %}
+											<li class="hoverExtend active">
+											{% else %}
+											<li class="hoverExtend">
+											{% endif %}
+											<a href="?page={{ pagenum }}" title="#">{{pagenum}}</a></li>
+										{% endfor %}
+
+										{% if stories.has_next %}
+											<li class="next prevnext"><a href="?page={{ stories.next_page_number }}" title="#"><i class="fa fa-angle-right"></i></a></li>
+										{% else %}
+											<li class="next prevnext"><a href="" title="#"><i class="fa fa-angle-right"></i></a></li>
+										{% endif %}
+
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+						<div class="paginations pagination-prevnext">
+							<div class="row">
+								{% if stories.has_previous %}
+									<div class="col-xs-4 prev hoverExtend active">
+										<a href="?page={{ stories.previous_page_number }}" title="#">Previous</a>
+									</div>
+								{% else %}
+									<div class="col-xs-4 prev hoverExtend active">
+										<a href="" title="#">Previous</a>
+									</div>
+								{% endif %}
+
+								<div class="col-xs-4 info hidden-xs">Page {{ stories.number }} of {{ stories.paginator.num_pages }}.</div>
+								{% if stories.has_next %}
+									<div class="col-xs-4 col-xs-offset-4 col-sm-offset-0 next hoverExtend active text-right">
+										<a href="?page={{ stories.next_page_number }}" title="#">Next</a>
+									</div>
+							    {% else %}
+							    	<div class="col-xs-4 prev hoverExtend active">
+										<a href="" title="#">Next</a>
+									</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Aside -->
+				<aside class="col-xs-12 col-sm-4 aside">
+					<div class="row">
+
+						<!-- About me box -->
+						<div class="col-xs-12 i">
+							<div class="box aboutMeBox">
+								<div class="c">
+									<img src="{% static 'tmp/190x190-1.jpg'%}" alt="#" class="img-responsive image thumbnail">
+									<div class="name">{{instance.user.get_full_name}}</div>
+									{% if instance.bio %}
+									<p class="info">{{instance.bio}}</p>
+									{% endif %}
+									{% if instance.dob%}
+									<p class="info">{{instance.dob}}</p>
+									{%endif%}
+									<p class="info">{% if not follower%}0{%else%}{{follower}}{%endif%} follower , {% if not following%}0{%else%}{{following}}{%endif%} following</p>
+
+									<div class="btns">
+										<form action="" method="POST">{% csrf_token %}
+											{% if instance.user != request.user %}
+												<button class="btn btn-color-full" type="submit">
+													{% if request.user.username not in instance.follower %}
+														<span>Follow</span>
+													{% else %}
+														<span>Unollow</span>
+													{% endif %}
+												</button>
+											    <a href="page-about-me.html" title="#" class="btn btn-color-full"><span>Message</span></a>
+										    {% endif  %}
+                                        </form>
+										<a href="{% url 'user:update' instance.user|slugify %}" title="#" class="btn btn-color-full"><span>Update</span></a>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Socials -->
+						<div class="col-xs-12 i">
+							<div class="box socials">
+								<a href="#" title="#" class="i"><i class="fa fa-twitter"></i></a>
+								<a href="#" title="#" class="i"><i class="fa fa-facebook"></i></a>
+								<a href="#" title="#" class="i"><i class="fa fa-google-plus"></i></a>
+								<a href="#" title="#" class="i"><i class="fa fa-linkedin"></i></a>
+								<a href="#" title="#" class="i"><i class="fa fa-pinterest-p"></i></a>
+								<a href="#" title="#" class="i"><i class="fa fa-tumblr"></i></a>
+								<a href="#" title="#" class="i"><i class="fa fa-vimeo-square"></i></a>
+								<a href="#" title="#" class="i"><i class="fa fa-youtube"></i></a>
+								<a href="#" title="#" class="i"><i class="fa fa-instagram"></i></a>
+							</div>
+						</div>
+												<!-- Post slider -->
+						<div class="col-xs-12 i">
+							<div class="box postSlider">
+								<h2>My Stories</h2>
+
+								<div class="asideCarousel js-aside-carousel">
+									{% for story in stories%}
+										<div class="i">
+											<div class="c">
+												<article class="article">
+													<a href="{% url 'story:detail' story.title|slugify %}" title="#" class="image">
+														<img src="{% static 'tmp/290x193-1.jpg'%}" alt="#" width="290" height="193" class="img-responsive">
+													</a>
+													<h3 class="title">
+														<a href="{% url 'story:detail' story.title|slugify %}" title="#">{{story.title}}</a>
+													</h3>
+													<div class="info">{{story.created_at|date}}</div>
+													<div class="info">{{story.description}}</div>
+												</article>
+											</div>
+										</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+
+
+						<!-- Popular posts -->
+						<div class="col-xs-12 i">
+							<div class="box articleMediaList">
+								<h2>Friends Circle</h2>
+
+								<div class="articlesFilter clearfix js-tabs" role="tablist">
+									<div class="i">
+										<a href="#follower" aria-controls="follower" role="tab" data-toggle="tab" class="active">Follower</a>
+									</div>
+									<div class="i text-center">
+										<a href="#following" aria-controls="following" role="tab" data-toggle="tab">Following</a>
+									</div>
+								</div>
+
+								<div class="tab-content bordered">
+									<div role="tabpanel" class="tab-pane fade in active" id="follower">
+										<div class="tags">
+											<div class="c">
+												{% if not follower %}
+													<a href="#" title="#" class="btn btn-color"><span > No Follower</span></a>
+												{% else %}
+												{% for follower in instance.follower%}
+													<a href="{% url 'user:profile' follower|slugify %}" class="btn btn-color"><span class="fa fa-user icon"> {{follower}}</span></a>
+												{% endfor %}
+												{% endif %}
+											</div>
+										</div>
+									</div>
+
+									<!-- This month -->
+									<div role="tabpanel" class="tab-pane fade" id="following">
+										<div class="tags">
+											<div class="c">
+												{% if not following %}
+													<a href="#" title="#" class="btn btn-color"><span> No Follower</span></a>
+												{% endif %}
+												{% for following in instance.following%}
+													<a href="{% url 'user:profile' following|slugify %}" class="btn btn-color"><span class="fa fa-user icon"> {{following}}</span></a>
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Most popular by -->
+						<div class="col-xs-12 i">
+							<div class="box articleMediaList">
+								<h2>Most popular by</h2>
+
+								<div class="articlesFilter clearfix js-tabs" role="tablist">
+									<div class="i">
+										<a href="#views" aria-controls="views" role="tab" data-toggle="tab" class="active">Views</a>
+									</div>
+									<div class="i">
+										<a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">Likes</a>
+									</div>
+									<div class="i">
+										<a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Comments</a>
+									</div>
+								</div>
+
+								<div class="tab-content bordered">
+									<!-- Views -->
+									<div role="tabpanel" class="tab-pane fade in active" id="views">
+										<article class="article media">
+											<div class="media-left media-middle">
+												<a href="#" title="#" class="image">
+													<img src="{% static 'tmp/90x90-1.jpg'%}" alt="#" width="90" height="90" class="media-object">
+												</a>
+											</div>
+											<div class="media-body">
+												<h3 class="title">
+													<a href="#" title="#">Even Forest Powers Have Limits</a>
+												</h3>
+												<div class="info">
+													<a href="#" title="#">March 26, 2016</a>
+												</div>
+											</div>
+										</article>
+									</div>
+
+									<!-- Likes -->
+									<div role="tabpanel" class="tab-pane fade" id="likes">
+										<article class="article media">
+											<div class="media-left media-middle">
+												<a href="#" title="#" class="image">
+													<img src="{% static 'tmp/90x90-3.jpg'%}" alt="#" width="90" height="90" class="media-object">
+												</a>
+											</div>
+											<div class="media-body">
+												<h3 class="title">
+													<a href="#" title="#">Checkin' out my new Fuji camera</a>
+												</h3>
+												<div class="info">
+													<a href="#" title="#">March 25, 2016</a>
+												</div>
+											</div>
+										</article>
+									</div>
+
+									<!-- Comments -->
+									<div role="tabpanel" class="tab-pane fade" id="comments">
+										<article class="article media">
+											<div class="media-left media-middle">
+												<a href="#" title="#" class="image">
+													<img src="{% static 'tmp/90x90-2.jpg'%}" alt="#" width="90" height="90" class="media-object">
+												</a>
+											</div>
+											<div class="media-body">
+												<h3 class="title">
+													<a href="#" title="#">There is something in the New York air that makes sleep useless.</a>
+												</h3>
+												<div class="info">
+													<a href="#" title="#">March 25, 2016</a>
+												</div>
+											</div>
+										</article>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-xs-12 i">
+							<div class="box tags">
+								<h2>Categories</h2>
+								<div class="c">
+									{% for category in categories%}
+										<a href="#" title="#" class="btn btn-color"><span class="fa fa-tags icon"> {{category}}</span></a>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 i">
+							<div class="box tags">
+								<h2>Tags</h2>
+								<div class="c">
+									{% for tag in tags%}
+										<a href="#" title="#" class="btn btn-color"><span class='fa fa-tags icon'> {{tag}}</span></a>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+{% endblock main %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Contact Us | {{ block.super }} {% endblock head_title %}
+
+{% block main %}
+
+        <!-- Content -->
+        <div class="page-contact">
+            <!-- Contact us header -->
+            <header class="pagesHeader contactHeader contactUsHeader">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+                            <h1><span>Contact us</span></h1>
+                            <h2>Drop us a line</h2>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Contact details -->
+            <div class="contactDetails">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 i">
+                            <i class="fa fa-map-marker icon"></i>
+                            Pulchowk,<br />Lalitpur
+                        </div>
+                        <div class="col-xs-12 col-sm-4 i">
+                            <i class="fa fa-envelope icon"></i>
+                            <a href="mailto:hello@blogee.co" title="#">hello@bctians.com</a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 i">
+                            <i class="fa fa-phone icon"></i>
+                            +387 (0)33 25 43 62
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact form -->
+            <div class="contactFormWrap customForms customForm">
+                <div class="container">
+                    <form>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 user">
+                                <i class="fa fa-user icon"></i>
+                                <input type="text" placeholder="Name" class="input">
+                            </div>
+                            <div class="col-xs-12 col-sm-4 misc">
+                                <i class="fa fa-envelope icon"></i>
+                                <input type="email" placeholder="E-mail" class="input">
+                            </div>
+                            <div class="col-xs-12 col-sm-4 misc">
+                                <i class="fa fa-folder icon"></i>
+                                <input type="text" placeholder="Subject" class="input">
+                            </div>
+                            <div class="col-xs-12 misc">
+                                <i class="fa fa-comment icon"></i>
+                                <textarea placeholder="Message" class="input"></textarea>
+                            </div>
+
+                            <div class="col-xs-12 text-center">
+                                <button class="btn btn-color-full" type="submit"><span>Send</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Google map -->
+            <div id="googleMap" data-lat="27.6828" data-lng="85.3180" data-zoom="16"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+        </div>
+
+{% endblock main %}

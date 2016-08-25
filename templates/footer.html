@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<footer id="footer">
+    <div class="logoWrap">
+        <div class="container">
+            <h1>
+                <a href="{% url 'story:index' %}" title="#">
+                    <img src="{% static 'img/logo.png'%}" alt="#" width="208" height="108" class="img-responsive">
+                    <strong>StoryBook</strong>
+                </a>
+            </h1>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <div class="container">
+            Copyright @2016 Yours. All Rights Reserved.
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block head_title %}{{ author.user.username }} | Create Story {% endblock head_title %}
+
+{% block main %}
+<div class="contactFormWrap customForms customForm">
+  <div class="container">
+   <form role="form" method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form">
+       <div class="col-xs-12 col-sm-6 user">
+          <i class="fa fa-pencil icon"></i>
+            {{ form.title }}
+        </div>
+        <div class="col-xs-12 col-sm-6 user">
+          <i class="fa fa-image icon"></i>
+          {{ form.photo }}
+        </div>
+        <div class="col-xs-12 col-sm-6 user">
+          <i class="fa fa-tags icon"></i>
+          {{ form.tag }}
+        </div>
+        <div class="col-xs-12 col-sm-6 user">
+          <i class="fa fa-tags icon"></i>
+          {{ form.category }}
+        </div>
+
+         <div class="col-xs-12 col-sm-12 user">
+          <i class="fa fa-pencil icon"></i>
+          {{ form.description }}
+        </div>
+         <div class="col-xs-12 col-sm-12 user">
+          <i class="fa fa-envelope icon"></i>
+          {{ form.content }}
+        </div>
+
+        <div class="col-xs-6 col-sm-12 col-md-7">
+                  <label class="checkbox">
+                    <input type="checkbox" name="draft">
+                    <span>Save as Draft</span>
+                  </label>
+                </div>
+           <div class="col-xs-12 text-center">
+          <button class="btn btn-color-full" type="submit"><span>Create</span></button>
+        </div>
+      </div>
+  </form>
+  </div>
+</div>
+{% endblock main %}

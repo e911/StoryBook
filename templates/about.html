@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{%load staticfiles%}
+{% block head_title %}About Us | {{ block.super }} {% endblock head_title %}
+
+{% block main %}
+<!-- Content -->
+        <div class="page-about">
+            <!-- About me header -->
+            <header class="pagesHeader aboutHeader aboutUsHeader">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+                            <h1><span>About us</span></h1>
+                            <h2>Everything you need to know about Us</h2>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- About me text -->
+            <div class="aboutText rte">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <h2>What we do</h2>
+                            <p>Donec hendrerit risus eros, ac dictum nulla ornare vitae. Maecenas vitae condimentum dolor, vitae facilisis justo. Morbi tristique pretium odio, fermentum molestie erat. Nunc quis aliquam ligula. Fusce et odio ligula.</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <h2>Our mission</h2>
+                            <p>Nam elementum orci ullamcorper leo ultricies, vel consequat ligula dictum. Donec ut tellus vulputate, viverra nisi accumsan, viverra elit. Nam sed bibendum turpis. Aenean porta rutrum iaculis.</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <h2>Our Philosophy</h2>
+                            <p> Integer efficitur, nunc quis volutpat pretium, ligula ligula tincidunt sem, ac ullamcorper felis tortor eget mi. Mauris vel sollicitudin purus. Suspendisse et neque vel ante pharetra finibus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our team -->
+            <div class="ourTeamSection">
+                <div class="container">
+                    <header class="pagesHeader">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                                <h1 class="separator-gray"><span>Our Team</span></h1>
+                                <h2>Duis ex lectus, hendrerit ut lacus quis, viverra faucibus tellus.</h2>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 i">
+                            <a href="#" title="#">
+                                <img src="{% static 'tmp/270x300-1.jpg' %}" alt="#" width="270" height="300" class="img-responsive">
+                            </a>
+                            <h3 class="name">
+                                <a href="#" title="#">Aakash Shrestha</a>
+                            </h3>
+                            <h4 class="position">Creative Director</h4>
+                            <p>Suspendisse et neque vel ante pharetra finibus. Sed diam leo <a href="#" title="#">\+\</a></p>
+                            <div class="socials">
+                                <a href="#" title="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#" title="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#" title="#"><i class="fa fa-google-plus"></i></a>
+                                <a href="#" title="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 i">
+                            <a href="#" title="#">
+                                <img src="{% static 'tmp/270x300-2.jpg' %}" alt="#" width="270" height="300" class="img-responsive">
+                            </a>
+                            <h3 class="name">
+                                <a href="#" title="#">Pujan Fucche</a>
+                            </h3>
+                            <h4 class="position">Technical Director</h4>
+                            <p>Etiam vulputate, nisl eu cursus eleme tum, libero odio euismod ligula <a href="#" title="#">\+\</a></p>
+                            <div class="socials">
+                                <a href="#" title="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#" title="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#" title="#"><i class="fa fa-google-plus"></i></a>
+                                <a href="#" title="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 i">
+                            <a href="#" title="#">
+                                <img src="{% static 'tmp/270x300-3.jpg' %}" alt="#" width="270" height="300" class="img-responsive">
+                            </a>
+                            <h3 class="name">
+                                <a href="#" title="#">Raj Dangol</a>
+                            </h3>
+                            <h4 class="position">Art Director</h4>
+                            <p>Quisque a felis vel libero ultricies tincidunt iaculis eget nunc phasellus <a href="#" title="#">\+\</a></p>
+                            <div class="socials">
+                                <a href="#" title="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#" title="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#" title="#"><i class="fa fa-google-plus"></i></a>
+                                <a href="#" title="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quotes -->
+            <div class="quotesSection">
+                <div class="container">
+                    <header class="pagesHeader">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                                <h1><span>Some Inspiring Quotes</span></h1>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="rte text-center js-quotes-carousel">
+                        <div class="i">
+                            <blockquote class="blockquote-1">
+                                Thousands of candles can be lighted from a single candle, and the life of the candle will not be shortened. Happiness never decreases by being shared.
+                                <cite>Buddha</cite>
+                            </blockquote>
+                        </div>
+                        <div class="i">
+                            <blockquote class="blockquote-1">
+                                The most common way people give up their power is by thinking they don’t have any.
+                                <cite>Alice Walker</cite>
+                            </blockquote>
+                        </div>
+                        <div class="i">
+                            <blockquote class="blockquote-1">
+                                Strive not to be a success, but rather to be of value.
+                                <cite>Albert Einstein</cite>
+                            </blockquote>
+                        </div>
+                        <div class="i">
+                            <blockquote class="blockquote-1">
+                                I’ve learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.
+                                <cite>Maya Angelou</cite>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock main %}

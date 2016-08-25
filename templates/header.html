@@ -1,0 +1,128 @@
+{% load staticfiles %}
+
+<header id="header">
+    <!-- Main navigation bar -->
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <!-- Mobile navbar toggler -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <nav id="navbar" class="collapse navbar-collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav navigation">
+                    <li class="hoverExtend "><a href="{% url 'story:home' %}" title="#">Home</a></li>
+                    <li class="hoverExtend "><a href="{% url 'story:trending' %}" title="#" >Trending</a></li>
+                    <li class="hoverExtend "><a href="{% url 'story:recommended' %}" title="#" >Recommended</a></li>
+                    <li class="hoverExtend"><a href="{% url 'story:about' %}" title="#">About Us</a></li>
+                    <li class="hoverExtend"><a href="{% url 'story:contact' %}" title="#">Contact Us</a></li>
+                </ul>
+                <!-- Search, Share, Language -->
+                <ul class="nav navbar-nav navigation misc">
+                    <li>
+                        <a href="#" title="#" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a>
+                    </li>
+                    <li class="dropdown onHover">
+                        <a href="#" title="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <i class="fa fa-share-alt"></i>
+                        </a>
+                        <!-- Social dropdown -->
+                        <div class="dropdown-menu socials" role="menu">
+                            <ul>
+                                <li><a href="#" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
+                                <li><a href="#" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
+                                <li><a href="#" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% if not request.user.is_active %}
+                        <li class="hoverExtend dropdown onHover fullwidth">
+                            <a href="#" title="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In/Up</a>
+
+                            <!-- Templates dropdown -->
+                            <div class="dropdown-menu layouts" role="menu">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12">
+                                        <ul>
+                                            <li><a href="{% url 'user:signin' %}" title="#"><i class="fa fa-sign-in icon"></i> Sign In</a></li>
+                                            <li><a href="{% url 'user:signup' %}" title="#"><i class="fa fa-sign-in icon"></i> Sign Up</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="hoverExtend dropdown onHover fullwidth">
+                            <a href="#" title="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ request.user }}</a>
+
+                            <!-- Templates dropdown -->
+                            <div class="dropdown-menu layouts" role="menu">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12">
+                                        <ul>
+                                            <li><a href="{% url 'user:profile' request.user|slugify %}" title="#"><i class="fa fa-user icon"></i> Profile</a></li>
+                                            <li><a href="{% url 'user:update' request.user|slugify %}" title="#"><i class="fa fa-edit icon"></i> Update</a></li>
+                                            <li><a href="{% url 'story:create' request.user|slugify %}" title="#"><i class="fa fa-pencil icon"></i> Write</a></li>
+                                            <hr/>
+                                            <li><a href="{% url 'user:signout' %}" title="#"><i class="fa fa-sign-out icon"></i> Sign Out</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logoWrap">
+        <div class="container">
+            <h1>
+                <a href="{% url 'story:index' %}" title="#">
+                    <img src="{% static 'img/logo.png'%}" alt="#" width="208" height="108" class="img-responsive">
+                    <strong>Blogee</strong>
+                </a>
+            </h1>
+        </div>
+    </div>
+</header>
+<div class="modal fade in" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form method="GET" action='/home'>
+                        <div class="c">
+                            <input type="search" class="input" name='q' value="{{request.GET.q}}" placeholder="Type search term..." >
+                            <button class="btn btn-color-full" type="submit"><span>Search</span></button>
+                        </div>
+                        <a href="#" title="#" class="advanced js-advanced-search"><span>Advanced search</span></a>
+                        <div class="c advancedWrap container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 i">
+                                    <select class="js-select" name='c'>
+                                        <option>Story</option>
+                                        <option>User</option>
+                                        <option>Tags</option>
+                                        <option>Categories</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

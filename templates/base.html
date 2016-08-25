@@ -1,0 +1,110 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" conte{nt="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'favicon.ico'%}">
+
+  <title>
+    {% block head_title %}StoryBook{% endblock head_title %}
+  </title>
+
+  <!-- CSS -->
+	<link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/owl.carousel.css'%}">
+	<link rel="stylesheet" href="{% static 'assets/font-awesome/css/font-awesome.min.css'%}">
+	<link rel="stylesheet" href="{% static 'assets/css/select2.min.css'%}">
+	<link rel="stylesheet" href="{% static 'assets/css/app.min.css'%}">
+
+	<!-- Modernizr -->
+	<script src="{% static 'assets/js/modernizr-2.8.3.min.js'%}"></script>
+
+	<!-- Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:300,700,100,400' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,500,600,700,900' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:500,600,700,100,800,900,400,200,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
+  {% block style %}{% endblock style %}
+
+</head>
+<body>
+<div class="pageWrap">
+  {% include 'header.html' %}
+  {% block main %}{% endblock main %}
+  {% include 'footer.html' %}
+</div>
+
+
+	<script src="{% static 'assets/js/jquery-2.2.3.min.js' %}"></script>
+	<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'assets/js/masonry.pkgd.min.js' %}"></script>
+	<script src="{% static 'assets/js/underscore-min.js' %}"></script>
+	<script src="{% static 'assets/js/moment-2.8.3.js' %}"></script>
+	<script src="{% static 'assets/js/clndr.min.js' %}"></script>
+	<script src="{% static 'assets/js/select2.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.dotdotdot.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.countdown.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.countTo.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.easypiechart.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'assets/js/app.min.js' %}"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".comment-reply-btn").click(function(event){
+        event.preventDefault();
+        $(this).parent().next(".comment-reply").fadeToggle();
+    })
+})
+</script>
+
+	<!-- Calendar events -->
+	<script>
+		Calendar.events = [
+			{ date: moment().format('2016-04-07'), url: '#' },
+			{ date: moment().format('2016-04-08'), url: '#' },
+			{ date: moment().format('2016-04-09'), url: '#' },
+			{ date: moment().format('2016-04-23'), url: '#' },
+			{ date: moment().format('2016-05-10'), url: '#' },
+			{ date: moment().format('2016-05-14'), url: '#' },
+			{ date: moment().format('2016-05-19'), url: '#' },
+			{ date: moment().format('2016-05-28'), url: '#' },
+			{ date: moment().format('2016-09-04'), url: '#' },
+			{ date: moment().format('2016-09-09'), url: '#' },
+			{ date: moment().format('2016-09-14'), url: '#' },
+			{ date: moment().format('2016-09-17'), url: '#' },
+			{ date: moment().format('2016-09-21'), url: '#' },
+			{ date: moment().format('2016-09-26'), url: '#' },
+			{ date: moment().format('2016-09-28'), url: '#' },
+			{ date: moment().format('2016-10-04'), url: '#' },
+			{ date: moment().format('2016-10-09'), url: '#' },
+			{ date: moment().format('2016-10-14'), url: '#' },
+			{ date: moment().format('2016-10-17'), url: '#' },
+			{ date: moment().format('2016-10-21'), url: '#' },
+			{ date: moment().format('2016-10-26'), url: '#' },
+			{ date: moment().format('2016-10-28'), url: '#' },
+			{ date: moment().format('2016-11-04'), url: '#' },
+			{ date: moment().format('2016-11-09'), url: '#' },
+			{ date: moment().format('2016-11-14'), url: '#' },
+			{ date: moment().format('2016-11-17'), url: '#' },
+			{ date: moment().format('2016-11-21'), url: '#' },
+			{ date: moment().format('2016-11-26'), url: '#' },
+			{ date: moment().format('2016-11-28'), url: '#' },
+			{ date: moment().format('2016-12-04'), url: '#' },
+			{ date: moment().format('2016-12-09'), url: '#' },
+			{ date: moment().format('2016-12-14'), url: '#' },
+			{ date: moment().format('2016-12-17'), url: '#' },
+			{ date: moment().format('2016-12-21'), url: '#' },
+			{ date: moment().format('2016-12-26'), url: '#' },
+			{ date: moment().format('2016-12-28'), url: '#' },
+		];
+	</script>
+
+
+</body>
+</html>

@@ -1,0 +1,502 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head_title %} {{ block.super }} {% endblock head_title %}
+
+{% block main %}
+        <!-- Main carousel -->
+        <div class="mainCarousel mainCarousel-1">
+            <div class="container">
+                <div class="c-row">
+                    <div class="js-main-carousel-1">
+                        <article class="i article">
+                            <a href="#" title="#">
+                                <img src="{% static 'tmp/580x550-30.jpg' %}" alt="#" width="580" height="550" class="img-responsive">
+                            </a>
+                            <div class="c">
+                                <h2 class="title">
+                                    <a href="#" title="#">Creativity requires the courage to let go of certainties.</a>
+                                </h2>
+                                <div class="info">
+                                    <a href="#" title="#">Creative</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="i article">
+                            <a href="#" title="#">
+                                <img src="{% static 'tmp/580x550-31.jpg' %}" alt="#" width="580" height="550" class="img-responsive">
+                            </a>
+                            <div class="c">
+                                <h2 class="title">
+                                    <a href="#" title="#">The artist lives to have stories to tell and to learn to tell them well.</a>
+                                </h2>
+                                <div class="info">
+                                    <a href="#" title="#">Lifestyle</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="i article">
+                            <a href="#" title="#">
+                                <img src="{% static 'tmp/580x550-32.jpg' %}" alt="#" width="580" height="550" class="img-responsive">
+                            </a>
+                            <div class="c">
+                                <h2 class="title">
+                                    <a href="#" title="#">You don't need a silver fork to eat good food.</a>
+                                </h2>
+                                <div class="info">
+                                    <a href="#" title="#">Food</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="i article">
+                            <a href="#" title="#">
+                                <img src="{% static 'tmp/580x550-33.jpg' %}" alt="#" width="580" height="550" class="img-responsive">
+                            </a>
+                            <div class="c">
+                                <h2 class="title">
+                                    <a href="#" title="#">The world is a book, and those who do not travel read only a page.</a>
+                                </h2>
+                                <div class="info">
+                                    <a href="#" title="#">Travel</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="container">
+            <div class="row">
+                <!-- Listings -->
+                <div class="col-xs-12 col-sm-8">
+                    <div class="articlesListing">
+                        <!-- Standard post -->
+                        <article class="article">
+                            <div class="image">
+                                <a href="#" title="#" class="favs">
+                                    <i class="fa fa-heart"></i>
+                                    <div class="count">36</div>
+                                </a>
+                                <a href="#" title="#">
+                                    <img src="{% static 'tmp/770x513-39.jpg' %}" alt="#" width="770" height="513" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="box">
+                                <h3 class="title">
+                                    <a href="#" title="#">Mauris accumsan eleifend magna</a>
+                                </h3>
+                                <div class="info">
+                                    <div>
+                                        <span class="date">March 26, 2016</span>
+                                    </div>
+                                    <div>by <a href="#" title="#">Themees</a></div>
+                                    <div>in <a href="#" title="#">Nature</a></div>
+                                    <div>3 min read</div>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan eleifend magna. Curabitur scelerisque vitae augue ac dignissim.
+                                    Aliquam erat volutpat. Proin in ultricies ligula. Etiam rutrum porta lacus in posuere. vel tortor tempor risus ultricies bibendum...
+                                </p>
+                                <div class="btns text-center">
+                                    <a href="#" title="#" class="btn btn-primary"><span>Continue reading</span></a>
+                                </div>
+
+                                <footer class="footer">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-lg-6 tags">
+                                            <a href="#" title="#">#Nature</a>
+                                            <a href="#" title="#">#Forest</a>
+                                        </div>
+                                        <div class="col-sm-12 col-lg-6 moreInfo">
+                                            <div class="dropdown onHover">
+                                                <div id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" role="menu">
+                                                    <i class="fa fa-share-alt"></i> Share
+                                                </div>
+
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
+                                                    <li><a href="#" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
+                                                    <li><a href="#" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
+                                                    <li><a href="#" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
+                                                    <li><a href="#" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
+                                                    <li><a href="#" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
+                                                    <li><a href="#" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div><span><i class="fa fa-eye"></i> 86</span> Views</div>
+                                            <div><span><i class="fa fa-comments"></i> 36</span> Comments</div>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </div>
+                        </article>
+                        <!-- Politics -->
+                        <div class="relatedArticles">
+                            <header class="box">
+                                <h2>Popular Stories</h2>
+                            </header>
+                            <div class="articlesListing masonryListing">
+                                <div class="row js-related-articles-carousel">
+                                    <div class="col-xs-12 i">
+                                        <article class="article">
+                                            <div class="image">
+                                                <a href="#" title="#" class="favs">
+                                                    <i class="fa fa-heart"></i>
+                                                    <div class="count">36</div>
+                                                </a>
+                                                <a href="#" title="#">
+                                                    <img src="{% static 'tmp/770x579-11.jpg' %}" alt="#" width="770" height="579" class="img-responsive">
+                                                </a>
+                                            </div>
+                                            <div class="box">
+                                                <h3 class="title">
+                                                    <a href="#" title="#">A short walk in the forest</a>
+                                                </h3>
+                                                <div class="info">
+                                                    <div>
+                                                        <span class="date">March 26, 2016</span>
+                                                    </div>
+                                                    <div>by <a href="#" title="#">Themees</a></div>
+                                                    <div>in <a href="#" title="#">Nature</a></div>
+                                                    <div>15 min read</div>
+                                                </div>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan eleifend magna. Curabitur scelerisque vitae augue ac dignissim.
+                                                    Aliquam erat volutpat. Proin in ultricies ligula. Etiam rutrum porta lacus in posuere. vel tortor tempor risus ultricies bibendum...
+                                                </p>
+                                                <div class="btns text-center">
+                                                    <a href="#" title="#" class="btn btn-primary"><span>Continue reading</span></a>
+                                                </div>
+
+                                                <footer class="footer">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-lg-6 tags">
+                                                            <a href="#" title="#">#Walk</a>
+                                                            <a href="#" title="#">#Forest</a>
+                                                        </div>
+                                                        <div class="col-sm-12 col-lg-6 moreInfo">
+                                                            <div class="dropdown onHover">
+                                                                <div id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" role="menu">
+                                                                    <i class="fa fa-share-alt"></i>
+                                                                </div>
+
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                                    <li><a href="#" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
+                                                                    <li><a href="#" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
+                                                                    <li><a href="#" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
+                                                                    <li><a href="#" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
+                                                                    <li><a href="#" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
+                                                                    <li><a href="#" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
+                                                                    <li><a href="#" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div><span><i class="fa fa-eye"></i> 45</span></div>
+                                                            <div><span><i class="fa fa-comments"></i> 97</span></div>
+                                                        </div>
+                                                    </div>
+                                                </footer>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aside -->
+                <aside class="col-xs-12 col-sm-4 aside">
+                    <div class="row">
+
+                        <div class="col-xs-12 i">
+                            <div class="box textWidget">
+                                <h2>Sign In/Up</h2>
+
+                                <div class="c signInBtn">
+                                    <p>Get started with StoryBook</p>
+                                    <a href="{% url 'user:signup' %}" class="btn btn-color-full" type="submit"><span><i class="fa fa-sign-in icon"></i> Sign up</span></a>
+                                    <a href="{% url 'user:signin' %}" class="btn btn-color-full" type="submit"><span><i class="fa fa-sign-in icon"></i> Sign in</span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Post slider -->
+                        <div class="col-xs-12 i">
+                            <div class="box postSlider">
+                                <h2>Story</h2>
+
+                                <div class="asideCarousel js-aside-carousel">
+                                    <div class="i">
+                                        <div class="c">
+                                            <article class="article">
+                                                <a href="#" title="#" class="image">
+                                                    <img src="{% static 'tmp/290x193-1.jpg' %}" alt="#" width="290" height="193" class="img-responsive">
+                                                </a>
+                                                <h3 class="title">
+                                                    <a href="#" title="#">Nothing ever seems straightforward in Venice, least of all its romances.</a>
+                                                </h3>
+                                                <div class="info">March 22, 2016</div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                    <div class="i">
+                                        <div class="c">
+                                            <article class="article">
+                                                <a href="#" title="#" class="image">
+                                                    <img src="{% static 'tmp/290x193-3.jpg' %}" alt="#" width="290" height="193" class="img-responsive">
+                                                </a>
+                                                <h3 class="title">
+                                                    <a href="#" title="#">Monday Morning Cup of Coffee</a>
+                                                </h3>
+                                                <div class="info">March 22, 2016</div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                    <div class="i">
+                                        <div class="c">
+                                            <article class="article">
+                                                <a href="#" title="#" class="image">
+                                                    <img src="{% static 'tmp/290x193-2.jpg' %}" alt="#" width="290" height="193" class="img-responsive">
+                                                </a>
+                                                <h3 class="title">
+                                                    <a href="#" title="#">I love public transportation</a>
+                                                </h3>
+                                                <div class="info">March 22, 2016</div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Most popular by -->
+                        <div class="col-xs-12 i">
+                            <div class="box articleMediaList">
+                                <h2>Most popular by</h2>
+
+                                <div class="articlesFilter clearfix js-tabs" role="tablist">
+                                    <div class="i">
+                                        <a href="#comments" aria-controls="comments" role="tab" data-toggle="tab" class="active">Comments</a>
+                                    </div>
+                                    <div class="i">
+                                        <a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">Likes</a>
+                                    </div>
+                                </div>
+                                <div class="tab-content bordered">
+                                    <!-- Comments -->
+                                    <div role="tabpanel" class="tab-pane fade in active" id="comments">
+                                        <article class="article media">
+                                            <div class="media-left media-middle">
+                                                <a href="post-detail-standard.html" title="#" class="image">
+                                                    <img src="{% static 'tmp/90x90-1.jpg' %}" alt="#" width="90" height="90" class="media-object">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="title">
+                                                    <a href="post-detail-standard.html" title="#">Even Forest Powers Have Limits</a>
+                                                </h3>
+                                                <div class="info">
+                                                    <a href="post-detail-standard.html" title="#">March 26, 2016</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article class="article media">
+                                            <div class="media-left media-middle">
+                                                <a href="post-detail-standard.html" title="#" class="image">
+                                                    <img src="{% static 'tmp/90x90-2.jpg' %}" alt="#" width="90" height="90" class="media-object">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="title">
+                                                    <a href="post-detail-standard.html" title="#">There is something in the New York air that makes sleep useless.</a>
+                                                </h3>
+                                                <div class="info">
+                                                    <a href="post-detail-standard.html" title="#">March 25, 2016</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article class="article media">
+                                            <div class="media-left media-middle">
+                                                <a href="post-detail-standard.html" title="#" class="image">
+                                                    <img src="{% static 'tmp/90x90-3.jpg' %}" alt="#" width="90" height="90" class="media-object">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="title">
+                                                    <a href="post-detail-standard.html" title="#">Checkin' out my new Fuji camera</a>
+                                                </h3>
+                                                <div class="info">
+                                                    <a href="post-detail-standard.html" title="#">March 25, 2016</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article class="article media">
+                                            <div class="media-left media-middle">
+                                                <a href="post-detail-standard.html" title="#" class="image">
+                                                    <img src="{% static 'tmp/90x90-1.jpg' %}" alt="#" width="90" height="90" class="media-object">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="title">
+                                                    <a href="post-detail-standard.html" title="#">Even Forest Powers Have Limits</a>
+                                                </h3>
+                                                <div class="info">
+                                                    <a href="post-detail-standard.html" title="#">March 24, 2016</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+
+                                    <!-- Likes -->
+                                    <div role="tabpanel" class="tab-pane fade" id="likes">
+                                        <article class="article media">
+                                            <div class="media-left media-middle">
+                                                <a href="post-detail-standard.html" title="#" class="image">
+                                                    <img src="tmp/90x90-3.jpg" alt="#" width="90" height="90" class="media-object">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="title">
+                                                    <a href="post-detail-standard.html" title="#">Checkin' out my new Fuji camera</a>
+                                                </h3>
+                                                <div class="info">
+                                                    <a href="post-detail-standard.html" title="#">March 25, 2016</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article class="article media">
+                                            <div class="media-left media-middle">
+                                                <a href="post-detail-standard.html" title="#" class="image">
+                                                    <img src="tmp/90x90-2.jpg" alt="#" width="90" height="90" class="media-object">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="title">
+                                                    <a href="post-detail-standard.html" title="#">There is something in the New York air that makes sleep useless.</a>
+                                                </h3>
+                                                <div class="info">
+                                                    <a href="post-detail-standard.html" title="#">March 25, 2016</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article class="article media">
+                                            <div class="media-left media-middle">
+                                                <a href="post-detail-standard.html" title="#" class="image">
+                                                    <img src="tmp/90x90-1.jpg" alt="#" width="90" height="90" class="media-object">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="title">
+                                                    <a href="post-detail-standard.html" title="#">Even Forest Powers Have Limits</a>
+                                                </h3>
+                                                <div class="info">
+                                                    <a href="post-detail-standard.html" title="#">March 24, 2016</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article class="article media">
+                                            <div class="media-left media-middle">
+                                                <a href="post-detail-standard.html" title="#" class="image">
+                                                    <img src="tmp/90x90-3.jpg" alt="#" width="90" height="90" class="media-object">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="title">
+                                                    <a href="post-detail-standard.html" title="#">Checkin' out my new Fuji camera</a>
+                                                </h3>
+                                                <div class="info">
+                                                    <a href="post-detail-standard.html" title="#">March 25, 2016</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Comments -->
+                        <div class="col-xs-12 i">
+                            <div class="box commentsWrap">
+                                <h2>Recent Comments</h2>
+
+                                <div class="c">
+                                    <div class="media i">
+                                        <div class="media-left media-middle">
+                                            <a href="#" title="#" class="image">
+                                                <img src="{% static 'tmp/60x60-1.jpg' %}" alt="#" width="60" height="60" class="media-object">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="comment">
+                                                <p><a href="#" title="#">@AndrewDoe</a> Suspendisse potenti morbi phare arcu vitae risus feret finibus...</p>
+                                                <div class="info">
+                                                    <span>16 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media i">
+                                        <div class="media-left media-middle">
+                                            <a href="#" title="#" class="image">
+                                                <img src="{% static 'tmp/60x60-2.jpg' %}" alt="#" width="60" height="60" class="media-object">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="comment">
+                                                <p><a href="#" title="#">@Themees</a> Vestibulum consect lacus odio, in ultrices magna...</p>
+                                                <div class="info">
+                                                    <span>24 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media i">
+                                        <div class="media-left media-middle">
+                                            <a href="#" title="#" class="image">
+                                                <img src="{% static 'tmp/60x60-1.jpg' %}" alt="#" width="60" height="60" class="media-object">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="comment">
+                                                <p><a href="#" title="#">@Anne</a> Duis ullamcorper pretium risus, in ultrices magna.</p>
+                                                <div class="info">
+                                                    <span>29 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media i">
+                                        <div class="media-left media-middle">
+                                            <a href="#" title="#" class="image">
+                                                <img src="{% static 'tmp/60x60-3.jpg' %}" alt="#" width="60" height="60" class="media-object">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="comment">
+                                                <p><a href="#" title="#">@John</a> Duis semper nibh egestas dolor, vestibulum gravida.</p>
+                                                <div class="info">
+                                                    <span>44 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Subscribe -->
+                        <div class="col-xs-12 i">
+                            <div class="box subscribe signInOutWrap">
+                                <form>
+                                    <input type="text" placeholder="Your Email Adress" class="input">
+                                    <button class="btn" type="submit"><span>Subscribe</span></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+{% endblock main %}

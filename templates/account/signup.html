@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Sign Up | {{block.super}} {% endblock head_title %}
+
+{% block main %}
+
+<div class="page-sign-in-out">
+  <div class="container">
+    <div class="row">
+      <!-- Sign in -->
+      <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 i">
+        <div class="box signInOutWrap signin">
+          <h2>Sign up</h2>
+          <div class="c">
+            <form role="form" method="POST" action="" enctype="multipart.form-data">
+            {% csrf_token %}
+              <div class="row">
+                <div class="col-xs-12 user">
+                  <i class="fa fa-pencil icon"></i>
+                   {{form.first_name}}
+                </div>
+                <div class="col-xs-12 user">
+                  <i class="fa fa-pencil icon"></i>
+                    {{form.last_name}}
+                </div>
+                <div class="col-xs-12 user">
+                  <i class="fa fa-envelope icon"></i>
+                    {{form.email}}
+                </div>
+                <div class="col-xs-12 user">
+                  <i class="fa fa-user icon"></i>
+                    {{form.username}}
+                </div>
+                <div class="col-xs-12 password">
+                  <i class="fa fa-lock icon"></i>
+                    {{form.password}}
+                </div>
+                <div class="col-xs-6 col-sm-12 col-md-7">
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    <span>I  agree to the terms of service</span>
+                  </label>
+                </div>
+                <div class="col-xs-6 col-sm-12 col-md-5 text-right signInBtn">
+                  <button class="btn btn-color-full" type="submit"><span>Sign up</span></button>
+                </div>
+                <div class="col-xs-12">
+                  <div class="btns">
+                    <a href="#" title="#" class="btn fb"><span><i class="fa fa-facebook icon"></i> Connect</span></a>
+                    <a href="#" title="#" class="btn twitter"><span><i class="fa fa-twitter icon"></i> Connect</span></a>
+                    <a href="{% url 'user:signin'%}" title="#" class="btn google-plus"><span><i class="fa fa-twitter icon"></i> Sign in</span></a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main %}

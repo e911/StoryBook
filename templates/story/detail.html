@@ -1,0 +1,555 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head_title %}{{ story.title }} | {{ block.super }} {% endblock head_title %}
+{% block style %}
+    <style>
+    .rating {
+    overflow: hidden;
+    display: inline-block;
+    font-size: 0;
+    position: relative;
+}
+.rating-input {
+    float: right;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin: 0 0 0 -16px;
+    opacity: 0;
+}
+.rating:hover .rating-star:hover,
+.rating:hover .rating-star:hover ~ .rating-star,
+.rating-input:checked ~ .rating-star {
+    background-position: 0 0px;
+}
+.rating-star,
+.rating:hover .rating-star {
+    position: relative;
+    float: right;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url('{% static 'star.png' %}') 0 -16px;
+}
+
+/* Just for the demo */
+body {
+    margin: 20px;
+}
+    </style>
+
+{% endblock style %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <!-- Listings -->
+            <div class="col-xs-12 col-sm-8">
+                <div class="articlesListing">
+
+                    <!-- Post detail -->
+                    <article class="article articleDetail">
+                        <div class="image">
+                            <div class="favs">
+                                <i class="fa fa-comment"></i>
+                                <div class="count">{{story.responsecount}}</div>
+                            </div>
+                            <img src="{% static 'tmp/770x513-1.jpg' %}" alt="#" width="770" height="513" class="img-responsive">
+                        </div>
+                            <div class="box">
+                                <h3 class="title">
+                                    {{story.title}}
+                                </h3>
+                                <div class="info">
+                                    <div>
+                                        <span class="date">{{story.created_at|date}}</span>
+                                    </div>
+                                    <div>by <a href="{% url 'user:profile' story.author.user.username|slugify %}" title="#">{{story.author.user.username}}</a></div>
+                                    <div>in {% for category in story.category%}<a href="#" title="#">{{category}}, </a>{%endfor%}</div>
+                                    <div>3 min read</div>
+                                </div>
+
+                                <div class="rte js-imagelightbox">
+                                    <p>
+                                        {{story.content|linebreaks}}
+                                    </p>
+                                    <p>
+                                        End of the Story. Hope you like it.
+                                    </p>
+                                </div>
+
+                                <div class="socialShare">
+                                    <a href="#" title="#" class="i"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" title="#" class="i"><i class="fa fa-facebook"></i></a>
+                                    <a href="#" title="#" class="i"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" title="#" class="i"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#" title="#" class="i"><i class="fa fa-pinterest-p"></i></a>
+                                    <a href="#" title="#" class="i"><i class="fa fa-tumblr"></i></a>
+                                    <a href="#" title="#" class="i"><i class="fa fa-print"></i></a>
+                                    <a href="#" title="#" class="i"><i class="fa fa-envelope"></i></a>
+                                    <a href="#" title="#" class="i"><i class="fa fa-heart"></i></a>
+                                </div>
+
+                                <footer class="footer">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-lg-6 tags">
+                                        {% for tag in story.tag %}
+                                            <a href="#" title="#"><span class="fa fa-tags icon">{{tag}}</span></a>
+                                        {% endfor %}
+                                        </div>
+                                        <div class="col-sm-12 col-lg-6 moreInfo">
+                                            <div><span><i class="fa fa-comments"></i> {{story.responsecount}}</span> Comments</div>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </div>
+                    </article>
+
+                    <!-- Related articles -->
+                    <section class="relatedArticles">
+                        <header class="box">
+                            <h2>Similar Stories</h2>
+                        </header>
+                        <div class="articlesListing">
+                            <div class="row js-related-articles-carousel">
+                                <div class="col-xs-12 i">
+                                    <article class="article">
+                                        <div class="image">
+                                            <a href="post-detail-standard.html" title="#" class="favs">
+                                                <i class="fa fa-heart"></i>
+                                                <div class="count">36</div>
+                                            </a>
+                                            <a href="post-detail-standard.html" title="#">
+                                                <img src="{% static 'tmp/770x579-6.jpg' %}" alt="#" width="770" height="579" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="box">
+                                            <h3 class="title">
+                                                <a href="post-detail-standard.html" title="#">A short walk in the forest</a>
+                                            </h3>
+                                            <div class="info">
+                                                <div>
+                                                    <span class="date">March 26, 2016</span>
+                                                </div>
+                                                <div>by <a href="post-detail-standard.html" title="#">Themees</a></div>
+                                                <div>in <a href="post-detail-standard.html" title="#">Nature</a></div>
+                                                <div>15 min read</div>
+                                            </div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan eleifend magna. Curabitur scelerisque vitae augue ac dignissim.
+                                                Aliquam erat volutpat. Proin in ultricies ligula. Etiam rutrum porta lacus in posuere. vel tortor tempor risus ultricies bibendum...
+                                            </p>
+                                            <div class="btns text-center">
+                                                <a href="post-detail-standard.html" title="#" class="btn btn-primary"><span>Continue reading</span></a>
+                                            </div>
+
+                                            <footer class="footer">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-lg-6 tags">
+                                                        <a href="post-detail-standard.html" title="#">#Walk</a>
+                                                        <a href="post-detail-standard.html" title="#">#Forest</a>
+                                                    </div>
+                                                    <div class="col-sm-12 col-lg-6 moreInfo">
+                                                        <div class="dropdown onHover">
+                                                            <div id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" role="menu">
+                                                                <i class="fa fa-share-alt"></i>
+                                                            </div>
+
+                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div><span><i class="fa fa-eye"></i> 45</span></div>
+                                                        <div><span><i class="fa fa-comments"></i> 97</span></div>
+                                                    </div>
+                                                </div>
+                                            </footer>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <div class="col-xs-12 i">
+                                    <article class="article">
+                                        <div class="image">
+                                            <a href="post-detail-standard.html" title="#" class="favs">
+                                                <i class="fa fa-heart"></i>
+                                                <div class="count">54</div>
+                                            </a>
+                                            <a href="post-detail-standard.html" title="#">
+                                                <img src="{% static 'tmp/770x579-5.jpg' %}" alt="#" width="770" height="579" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="box">
+                                            <h3 class="title">
+                                                <a href="post-detail-standard.html" title="#">My weekend escape from the city</a>
+                                            </h3>
+                                            <div class="info">
+                                                <div>
+                                                    <span class="date">March 26, 2016</span>
+                                                </div>
+                                                <div>by <a href="post-detail-standard.html" title="#">Themees</a></div>
+                                                <div>in <a href="post-detail-standard.html" title="#">Nature</a></div>
+                                                <div>8 min read</div>
+                                            </div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan eleifend magna. Curabitur scelerisque vitae augue ac dignissim.
+                                                Aliquam erat volutpat. Proin in ultricies ligula. Etiam rutrum porta lacus in posuere. vel tortor tempor risus ultricies bibendum...
+                                            </p>
+                                            <div class="btns text-center">
+                                                <a href="post-detail-standard.html" title="#" class="btn btn-primary"><span>Continue reading</span></a>
+                                            </div>
+
+                                            <footer class="footer">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-lg-6 tags">
+                                                        <a href="post-detail-standard.html" title="#">#Escape</a>
+                                                        <a href="post-detail-standard.html" title="#">#Cityt</a>
+                                                    </div>
+                                                    <div class="col-sm-12 col-lg-6 moreInfo">
+                                                        <div class="dropdown onHover">
+                                                            <div id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true" role="menu">
+                                                                <i class="fa fa-share-alt"></i>
+                                                            </div>
+
+                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div><span><i class="fa fa-eye"></i> 26</span></div>
+                                                        <div><span><i class="fa fa-comments"></i> 96</span></div>
+                                                    </div>
+                                                </div>
+                                            </footer>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <div class="col-xs-12 i">
+                                    <article class="article">
+                                        <div class="image">
+                                            <a href="post-detail-standard.html" title="#" class="favs">
+                                                <i class="fa fa-heart"></i>
+                                                <div class="count">36</div>
+                                            </a>
+                                            <a href="post-detail-standard.html" title="#">
+                                                <img src="{% static 'tmp/770x579-7.jpg' %}" alt="#" width="770" height="579" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="box">
+                                            <h3 class="title">
+                                                <a href="post-detail-standard.html" title="#">What a wonderful world!</a>
+                                            </h3>
+                                            <div class="info">
+                                                <div>
+                                                    <span class="date">March 26, 2016</span>
+                                                </div>
+                                                <div>by <a href="post-detail-standard.html" title="#">World</a></div>
+                                                <div>in <a href="post-detail-standard.html" title="#">Feelings</a></div>
+                                                <div>15 min read</div>
+                                            </div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan eleifend magna. Curabitur scelerisque vitae augue ac dignissim.
+                                                Aliquam erat volutpat. Proin in ultricies ligula. Etiam rutrum porta lacus in posuere. vel tortor tempor risus ultricies bibendum...
+                                            </p>
+                                            <div class="btns text-center">
+                                                <a href="post-detail-standard.html" title="#" class="btn btn-primary"><span>Continue reading</span></a>
+                                            </div>
+
+                                            <footer class="footer">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-lg-6 tags">
+                                                        <a href="post-detail-standard.html" title="#">#Walk</a>
+                                                        <a href="post-detail-standard.html" title="#">#Forest</a>
+                                                    </div>
+                                                    <div class="col-sm-12 col-lg-6 moreInfo">
+                                                        <div class="dropdown onHover">
+                                                            <div id="dropdownMenu3" data-toggle="dropdown" aria-expanded="true" role="menu">
+                                                                <i class="fa fa-share-alt"></i>
+                                                            </div>
+
+                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
+                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div><span><i class="fa fa-eye"></i> 45</span></div>
+                                                        <div><span><i class="fa fa-comments"></i> 97</span></div>
+                                                    </div>
+                                                </div>
+                                            </footer>
+                                        </div>
+                                    </article>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Comments -->
+                    <div class="articleComments box">
+                        <h2>Comments</h2>
+                        {% if request.user.is_authenticated %}
+                            <form method="POST" action="">{% csrf_token %}
+                                <div class="row">
+                                    <div class="col-xs-12 i">
+                                        <span class="rating">
+                                            <input type="radio" class="rating-input"
+                                            id="rating-input-1-5" name="rating-input-1" value="5"/>
+                                            <label for="rating-input-1-5" class="rating-star"></label>
+                                            <input type="radio" class="rating-input"
+                                            id="rating-input-1-4" name="rating-input-1" value="4"/>
+                                            <label for="rating-input-1-4" class="rating-star"></label>
+                                            <input type="radio" class="rating-input"
+                                            id="rating-input-1-3" name="rating-input-1" value="3"/>
+                                            <label for="rating-input-1-3" class="rating-star"></label>
+                                            <input type="radio" class="rating-input"
+                                            id="rating-input-1-2" name="rating-input-1" value="2"/>
+                                            <label for="rating-input-1-2" class="rating-star"></label>
+                                            <input type="radio" class="rating-input"
+                                            id="rating-input-1-1" name="rating-input-1" value="1"/>
+                                            <label for="rating-input-1-1" class="rating-star"></label>
+                                        </span><br/>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        {{ form.comment }}<br/>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="btns">
+                                            <a href="#" title="#" class="btn fb"><span><i class="fa fa-facebook icon"></i> Connect</span></a>
+                                            <a href="#" title="#" class="btn twitter"><span><i class="fa fa-twitter icon"></i> Connect</span></a>
+                                            <a href="#" title="#" class="btn google-plus"><span><i class="fa fa-google-plus icon"></i> Connect</span></a>
+                                            <button type="submit" class="btn btn-color-full submit">
+                                                <span>Comment</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        {% else %}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span >You must login to comment. </span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Article comments listing -->
+                    <div class="articleCommentsListing">
+                        <ul>
+                            {% for comment in story.response %}
+                            <li class="i">
+                                <div class="image">
+                                    <img src="{% static 'tmp/60x60-1.jpg' %}" alt="#" width="60" height="60">
+                                </div>
+                                <div class="box">
+                                    <header>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-lg-8 commentInfo">
+                                                <a href="{% url 'user:profile' comment.commenter.user.username|slugify %}">
+                                                <span class="name">{{comment.commenter.user.username}}</span>
+                                                </a>
+                                                <span class="time info">{{comment.created_at|timesince}} ago</span>
+
+                                            </div>
+                                            <div class="col-xs-12 col-lg-4 options">
+                                                <div class="likes">
+                                                    <span>{% if comment.children.count > 0 %}{{ comment.children.count }}{% if comment.children.count > 1 %} Replies{% else %} Reply{% endif %} | {% endif %}</span> <a href="#" title="#"><i class="fa fa-comments icon"></i></a>
+                                                </div>
+                                                <div>
+                                                    <a  class='comment-reply-btn' href="#" title="#"><i class="fa fa-reply"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <div class="c">
+                                        <p>{{comment.comment}}</p>
+                                    </div>
+                                </div>
+                                <div class="articleComments box">
+                                    <h2>Reply</h2>
+                                    {% if request.user.is_authenticated %}
+                                        <form method="POST" action="">{% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    {{ form.comment }}<br/>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="btns">
+                                                        <a href="#" title="#" class="btn fb"><span><i class="fa fa-facebook icon"></i> Connect</span></a>
+                                                        <a href="#" title="#" class="btn twitter"><span><i class="fa fa-twitter icon"></i> Connect</span></a>
+                                                        <a href="#" title="#" class="btn google-plus"><span><i class="fa fa-google-plus icon"></i> Connect</span></a>
+                                                        <input type='hidden' name='parent_id' value='{{ comment.id }}'>
+                                                        <button type="submit" class="btn btn-color-full submit">
+                                                            <span>Reply</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    {% else %}
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span>You must login to reply. </span>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <ul class='comment-reply'>
+                                {% for child_comment in comment.children %}
+                                    <li class="i">
+                                        <div class="image">
+                                            <img src="{% static 'tmp/60x60-3.jpg' %}" alt="#" width="60" height="60">
+                                        </div>
+                                        <div class="box">
+                                            <header>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-lg-8 commentInfo">
+                                                        <a href="{% url 'user:profile' comment.commenter.user.username|slugify %}">
+                                                        <span class="name">{{child_comment.commenter.user.username}}</span>
+                                                        </a>
+                                                        <span class="time info">{{child_comment.created_at|timesince}} ago</span>
+                                                    </div>
+                                                </div>
+                                            </header>
+                                            <div class="c">
+                                                <p>{{child_comment.comment}}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <br/>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <br/>
+                            <hr/>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aside -->
+            <aside class="col-xs-12 col-sm-4 aside">
+                <div class="row">
+
+                    <!-- Our authors -->
+                    <div class="col-xs-12 i">
+                        <div class="box ourAuthorsBox">
+                            <h2>Author</h2>
+
+                            <div class="c">
+                                <div>
+                                    <div class="i">
+                                        <div class="imageWrap">
+                                            <img src="{% static 'tmp/190x190-2.jpg' %}" alt="#" width="190" height="190" class="img-responsive image">
+                                        </div>
+                                        <div class="name">{{story.author.user.get_full_name}}</div>
+                                        {% if story.author.bio  %}
+                                        <p class="info">{{story.author.bio}}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="btns">
+                                    <form action="{% url 'user:profile' story.author.user.username|slugify %}" method="POST">{% csrf_token %}
+                                            {% if story.author.user != request.user %}
+                                                <button class="btn btn-color-full" type="submit">
+                                                    {% if request.user.username not in story.author.follower %}
+                                                        <span>Follow</span>
+                                                    {% else %}
+                                                        <span>Unollow</span>
+                                                    {% endif %}
+                                                </button>
+                                            {% endif  %}
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Socials -->
+                    <div class="col-xs-12 i">
+                        <div class="box socials">
+                            <a href="#" title="#" class="i"><i class="fa fa-twitter"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-facebook"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-linkedin"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-pinterest-p"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-tumblr"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-vimeo-square"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-youtube"></i></a>
+                            <a href="#" title="#" class="i"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                                            <!-- Post slider -->
+                    <div class="col-xs-12 i">
+                        <div class="box postSlider">
+                            <h2>Similar Stories</h2>
+
+                            <div class="asideCarousel js-aside-carousel">
+                                <div class="i">
+                                    <div class="c">
+                                        <article class="article">
+                                            <a href="post-detail-standard.html" title="#" class="image">
+                                                <img src="{% static 'tmp/290x193-1.jpg' %}" alt="#" width="290" height="193" class="img-responsive">
+                                            </a>
+                                            <h3 class="title">
+                                                <a href="post-detail-standard.html" title="#">Nothing ever seems straightforward in Venice, least of all its romances.</a>
+                                            </h3>
+                                            <div class="info">March 22, 2016</div>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="i">
+                                    <div class="c">
+                                        <article class="article">
+                                            <a href="post-detail-standard.html" title="#" class="image">
+                                                <img src="{% static 'tmp/290x193-3.jpg' %}" alt="#" width="290" height="193" class="img-responsive">
+                                            </a>
+                                            <h3 class="title">
+                                                <a href="post-detail-standard.html" title="#">Monday Morning Cup of Coffee</a>
+                                            </h3>
+                                            <div class="info">March 22, 2016</div>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="i">
+                                    <div class="c">
+                                        <article class="article">
+                                            <a href="post-detail-standard.html" title="#" class="image">
+                                                <img src="{% static 'tmp/290x193-2.jpg' %}" alt="#" width="290" height="193" class="img-responsive">
+                                            </a>
+                                            <h3 class="title">
+                                                <a href="post-detail-standard.html" title="#">I love public transportation</a>
+                                            </h3>
+                                            <div class="info">March 22, 2016</div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+{% endblock main %}
