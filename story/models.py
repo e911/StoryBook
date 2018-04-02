@@ -28,6 +28,7 @@ class Story(Timestampable):
     width = models.IntegerField(default=0)
     description = models.TextField(blank=True)
     content = models.TextField(blank=True)
+    read_time = models.PositiveIntegerField(default=0, null=True)
     tag = ArrayField(models.CharField(
         max_length=255, blank=True), blank=True)
     category = ArrayField(models.CharField(
@@ -38,6 +39,16 @@ class Story(Timestampable):
     def __str__(self):
         return self.title
 
+    def get_similar_stories(self):
+        from story.utils import cosineSimilairty
+        candidates=[]
+        max_sim = cosineSimilairty(self.content,self.content)
+        for story in Story.objects.all():
+            candidates.append((cosineSimilairty(self.content,story.content),story.id))
+        id_and_sim = [(two,one *100/max_sim)
+                      for (one, two) in sorted(candidates,reverse=True)]
+        story_and_sim = [(Story.objects.get(id=id),sim) for id,sim in id_and_sim]
+        return story_and_sim
 
     def get_absolute_url(self):
         return reverse("story:detail", kwargs={"story_slug": self.slug})
@@ -103,13 +114,6 @@ class Rating(Timestampable):
     def __str__(self):
        title ="{user}-{story}"
        return title.format(user=self.author.user.username, story=self.story.title)
-
-
-class Data(models.Model):
-    data = JSONField()
-
-    def __str__(self):
-        return 'Training data'
 
 
 class Frequency(models.Model):

@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from story.models import Story, Response, Rating
-from account.models import Author
+from account.models import Author, Data
 from .forms import StoryForm, ResponseForm
 from django.contrib import messages
 from django.db.models import Q
@@ -129,18 +129,32 @@ class Index(View):
 class Home(View):
     def get(self, request):
         stories_list = Story.objects.all()
+        user_list = Author.objects.all()
         query = request.GET.get("q")
         kind = request.GET.get("c")
-        if kind=='Story':
-            a = 'a'
-        elif kind=='User':
-            a = 'b'
-        elif kind=='Tags':
-            a = 'c'
-        else:
-            a = 'd'
+        if query:
+            if kind=='Story':
+                stories_list = stories_list.filter(
+                    Q(title__icontains=query) |
+                    Q(description__icontains=query) |
+                    Q(content__icontains=query)
+                    ).distinct()
+            elif kind=='User':
+                stories_list = stories_list.filter(
+                    Q(author__user__username__icontains=query) |
+                    Q(author__user__first_name__icontains=query) |
+                    Q(author__user__last_name__icontains=query)
+                    ).distinct()
+            elif kind=='Tags':
+                stories_list = stories_list.filter(
+                    Q(tag__icontains=query)
+                    ).distinct()
+            else:
+                stories_list = stories_list.filter(
+                    Q(category__icontains=query)
+                    ).distinct()
 
-        paginator = Paginator(stories_list, 1) # Show 25 contacts per page
+        paginator = Paginator(stories_list, 4) # Show 25 contacts per page
         page = request.GET.get('page')
         try:
             stories = paginator.page(page)
@@ -150,6 +164,7 @@ class Home(View):
         except EmptyPage:
             # If page is out of range (e.g. 9999), deliver last page of results.
             stories = paginator.page(paginator.num_pages)
+
 
         tags, categories = [], []
         for story in stories_list:
@@ -162,24 +177,20 @@ class Home(View):
             'stories':stories,
             'tags':tags,
             'categories':categories,
+            'kind':kind,
         }
         return render(request,'story/home.html',context)
 
 class Trending(View):
     def get(self, request):
-        stories_list = Story.objects.all()
-        query = request.GET.get("q")
-        kind = request.GET.get("c")
-        if kind=='Story':
-            a = 'a'
-        elif kind=='User':
-            a = 'b'
-        elif kind=='Tags':
-            a = 'c'
-        else:
-            a = 'd'
+        rating = Rating.objects.filter(rating=5)
+        id= []
+        for object in rating:
+            id.append(object.story.id)
+        id = set(id)
+        stories_list = Story.objects.filter(id__in = id)
 
-        paginator = Paginator(stories_list, 1) # Show 25 contacts per page
+        paginator = Paginator(stories_list, 4) # Show 25 contacts per page
         page = request.GET.get('page')
         try:
             stories = paginator.page(page)
@@ -206,19 +217,19 @@ class Trending(View):
 
 class Recommended(View):
     def get(self, request):
-        stories_list = Story.objects.all()
-        query = request.GET.get("q")
-        kind = request.GET.get("c")
-        if kind=='Story':
-            a = 'a'
-        elif kind=='User':
-            a = 'b'
-        elif kind=='Tags':
-            a = 'c'
+        data = Data.objects.all().first()
+        author = Author.objects.get(user=request.user)
+        if author.user.username in data.data:
+            author.recommended_stories()
+            stories_list = Story.objects.all()[:10]
         else:
-            a = 'd'
-
-        paginator = Paginator(stories_list, 1) # Show 25 contacts per page
+            rating = Rating.objects.filter(rating=5)
+            id= []
+            for object in rating:
+                id.append(object.story.id)
+            id = set(id)
+            stories_list = Story.objects.filter(id__in = id)
+        paginator = Paginator(stories_list, 4) # Show 25 contacts per page
         page = request.GET.get('page')
         try:
             stories = paginator.page(page)

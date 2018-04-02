@@ -1,11 +1,10 @@
 from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField,JSONField
+from .utils import recommend_gradient, recommend_knn
 
 
 # Create your models here.
@@ -65,6 +64,19 @@ class Author(Timestampable):
 
     def __str__(self):
         return self.user.username
+
+    def recommended_stories(self):
+        data = Data.objects.all().first()
+        my_prediction, story_list = recommend_gradient(self.user.username, data)
+        recommended = recommend_knn(self.user.username, data,'Pearson')
+
+
+
+class Data(models.Model):
+    data = JSONField()
+
+    def __str__(self):
+        return 'Training data'
 
 
 class Message(Timestampable):

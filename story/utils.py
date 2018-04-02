@@ -3,7 +3,12 @@ from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from collections import Counter
-from math import sqrt
+from math import sqrt, ceil
+
+
+
+
+
 
 numstr = '0123456789'
 
@@ -19,6 +24,15 @@ def tokenize(text):
     tokens = [w for w in stemmed if w not in stopwords.words('english')]
     return Counter(tokens)
 
+def read_time(text):
+    wpm = 200
+    lower = text.lower()
+    punct_free = lower.translate(str.maketrans(
+        {key: None for key in punctuation}))
+    punct_num_free = punct_free.translate(str.maketrans(
+        {key: None for key in numstr}))
+    tokens = word_tokenize(punct_num_free)
+    return ceil(len(tokens)/wpm)
 
 def cosineSimilairty(txt1, txt2):
     vec1 = Counter(tokenize(txt1))
@@ -34,9 +48,6 @@ def cosineSimilairty(txt1, txt2):
         return 0.0
     else:
         return float(numerator / denominatior)
-
-
-
 
 
 
