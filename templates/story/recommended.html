@@ -30,23 +30,23 @@
                                 <div>by <a href="{% url 'user:profile' story.author.user.username|slugify %}" title="#">{{story.author.user.username}}</a></div>
                                 <div>in
                                     {% for category in story.category%}
-                                    <a href="#" title="#">#{{category}}</a>
+                                    <a href="/home/?q={{category}}&c=Categories" title="#">#{{category}}</a>
                                     {% endfor%}
                                     </div>
-                                <div>3 min read</div>
+                                <div>{{story.read_time}} min read</div>
                             </div>
                             <p>
                                 {{story.description}}
                             </p>
                             <div class="btns text-center">
-                                <a href="" title="#" class="btn btn-primary"><span>Continue reading</span></a>
+                                <a href="{{story.get_absolute_url}}" title="" class="btn btn-primary"><span>Continue reading</span></a>
                             </div>
 
                             <footer class="footer">
                                 <div class="row">
                                     <div class="col-sm-12 col-lg-6 tags">
                                         {% for tag in story.tag %}
-                                            <a href="#" title="#"><span class='fa fa-tags icon'> {{tag}} </span></a>
+                                            <a href="/home/?q{{tag}}=&c=Tags" title="#"><span class='fa fa-tags icon'> {{tag}} </span></a>
                                             {% endfor %}
                                     </div>
                                     <div class="col-sm-12 col-lg-6 moreInfo">
@@ -132,7 +132,7 @@
                     <!-- Most popular by -->
                     <div class="col-xs-12 i">
                         <div class="box articleMediaList">
-                            <h2>Most popular by</h2>
+                            <h2>Tags and Categories</h2>
 
                             <div class="articlesFilter clearfix js-tabs" role="tablist">
                                 <div class="i">
@@ -149,7 +149,7 @@
                                     <div class="tags">
                                         <div class="c">
                                             {% for tag in tags%}
-                                                <a href="#" title="#" class="btn btn-color"><span class='fa fa-tags icon'> {{tag}}</span></a>
+                                                <a href="/home/?q={{tag}}&c=Tags" title="#" class="btn btn-color"><span class='fa fa-tags icon'> {{tag}}</span></a>
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@
                                  <div class="tags">
                                         <div class="c">
                                             {% for category in categories%}
-                                                <a href="#" title="#" class="btn btn-color"><span class="fa fa-tags icon"> {{category}}</span></a>
+                                                <a href="/home/?q={{cateogry}}&c=Categories" title="#" class="btn btn-color"><span class="fa fa-tags icon"> {{category}}</span></a>
                                             {% endfor %}
                                         </div>
                                     </div>

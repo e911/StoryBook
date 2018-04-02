@@ -19,7 +19,9 @@
                 <ul class="nav navbar-nav navigation">
                     <li class="hoverExtend "><a href="{% url 'story:home' %}" title="#">Home</a></li>
                     <li class="hoverExtend "><a href="{% url 'story:trending' %}" title="#" >Trending</a></li>
+                    {% if request.user.is_authenticated %}
                     <li class="hoverExtend "><a href="{% url 'story:recommended' %}" title="#" >Recommended</a></li>
+                    {% endif %}
                     <li class="hoverExtend"><a href="{% url 'story:about' %}" title="#">About Us</a></li>
                     <li class="hoverExtend"><a href="{% url 'story:contact' %}" title="#">Contact Us</a></li>
                 </ul>

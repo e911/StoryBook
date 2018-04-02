@@ -39,7 +39,7 @@
 									<a href="#" title="#">#{{category}}</a>
 									{% endfor%}
 									</div>
-									<div>3 min read</div>
+									<div>{{story.read_time}} min read</div>
 								</div>
 								<p>
 									{{story.description}}
@@ -158,7 +158,6 @@
 									<p class="info">{{instance.dob}}</p>
 									{%endif%}
 									<p class="info">{% if not follower%}0{%else%}{{follower}}{%endif%} follower , {% if not following%}0{%else%}{{following}}{%endif%} following</p>
-
 									<div class="btns">
 										<form action="" method="POST">{% csrf_token %}
 											{% if instance.user != request.user %}
@@ -172,7 +171,9 @@
 											    <a href="page-about-me.html" title="#" class="btn btn-color-full"><span>Message</span></a>
 										    {% endif  %}
                                         </form>
+                                        {% if request.user == instance.user %}
 										<a href="{% url 'user:update' instance.user|slugify %}" title="#" class="btn btn-color-full"><span>Update</span></a>
+										{% endif %}
 
 									</div>
 								</div>
@@ -210,7 +211,7 @@
 														<a href="{% url 'story:detail' story.title|slugify %}" title="#">{{story.title}}</a>
 													</h3>
 													<div class="info">{{story.created_at|date}}</div>
-													<div class="info">{{story.description}}</div>
+													<div class="info">{{story.description|truncatewords:50}}</div>
 												</article>
 											</div>
 										</div>
@@ -350,7 +351,7 @@
 								<h2>Categories</h2>
 								<div class="c">
 									{% for category in categories%}
-										<a href="#" title="#" class="btn btn-color"><span class="fa fa-tags icon"> {{category}}</span></a>
+										<a href="/home/?q={{category}}&c=Category" title="#" class="btn btn-color"><span class="fa fa-tags icon"> {{category}}</span></a>
 									{% endfor %}
 								</div>
 							</div>
@@ -360,7 +361,7 @@
 								<h2>Tags</h2>
 								<div class="c">
 									{% for tag in tags%}
-										<a href="#" title="#" class="btn btn-color"><span class='fa fa-tags icon'> {{tag}}</span></a>
+										<a href="/home/?q={{tag}}&c=Category" title="#" class="btn btn-color"><span class='fa fa-tags icon'> {{tag}}</span></a>
 									{% endfor %}
 								</div>
 							</div>

@@ -66,8 +66,8 @@ body {
                                         <span class="date">{{story.created_at|date}}</span>
                                     </div>
                                     <div>by <a href="{% url 'user:profile' story.author.user.username|slugify %}" title="#">{{story.author.user.username}}</a></div>
-                                    <div>in {% for category in story.category%}<a href="#" title="#">{{category}}, </a>{%endfor%}</div>
-                                    <div>3 min read</div>
+                                    <div>in {% for category in story.category%}<a href="/home/?q={{category}}&c=Categories" title="#">{{category}}, </a>{%endfor%}</div>
+                                    <div>{{story.read_time}} min read</div>
                                 </div>
 
                                 <div class="rte js-imagelightbox">
@@ -95,7 +95,7 @@ body {
                                     <div class="row">
                                         <div class="col-sm-12 col-lg-6 tags">
                                         {% for tag in story.tag %}
-                                            <a href="#" title="#"><span class="fa fa-tags icon">{{tag}}</span></a>
+                                            <a href="/home/?q={{tag}}&c=Tags" title="#"><span class="fa fa-tags icon">{{tag}}</span></a>
                                         {% endfor %}
                                         </div>
                                         <div class="col-sm-12 col-lg-6 moreInfo">
@@ -113,42 +113,44 @@ body {
                         </header>
                         <div class="articlesListing">
                             <div class="row js-related-articles-carousel">
+                                {% for b, s in story.get_similar_stories|slice:":6" %}
                                 <div class="col-xs-12 i">
                                     <article class="article">
                                         <div class="image">
-                                            <a href="post-detail-standard.html" title="#" class="favs">
+                                            <a href="#" title="#" class="favs">
                                                 <i class="fa fa-heart"></i>
                                                 <div class="count">36</div>
                                             </a>
-                                            <a href="post-detail-standard.html" title="#">
-                                                <img src="{% static 'tmp/770x579-6.jpg' %}" alt="#" width="770" height="579" class="img-responsive">
+                                            <a href="{{b.get_absolute_url}}" title="#">
+                                                <img src="{% static 'tmp/770x513-1.jpg' %}" alt="#" width="770" height="579" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="box">
                                             <h3 class="title">
-                                                <a href="post-detail-standard.html" title="#">A short walk in the forest</a>
+                                                <a href="{{b.get_absolute_url}}" title="#">{{b.title}}</a>
                                             </h3>
                                             <div class="info">
                                                 <div>
-                                                    <span class="date">March 26, 2016</span>
+                                                    <span class="date">{{b.created_at}}</span>
                                                 </div>
-                                                <div>by <a href="post-detail-standard.html" title="#">Themees</a></div>
-                                                <div>in <a href="post-detail-standard.html" title="#">Nature</a></div>
-                                                <div>15 min read</div>
+                                                <div>in {% for category in b.category%}<a href="/home/?q={{category}}&c=Categories" title="#">{{category}}, </a>{%endfor%}</div>
+                                                <!-- <div>in <a href="#" title="#">{{b.tag}}</a></div> -->
+                                                <div>{{b.raed_time}} min read</div>
                                             </div>
                                             <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan eleifend magna. Curabitur scelerisque vitae augue ac dignissim.
-                                                Aliquam erat volutpat. Proin in ultricies ligula. Etiam rutrum porta lacus in posuere. vel tortor tempor risus ultricies bibendum...
+                                                {{b.description}}
                                             </p>
                                             <div class="btns text-center">
-                                                <a href="post-detail-standard.html" title="#" class="btn btn-primary"><span>Continue reading</span></a>
+                                                <a href="{{b.get_absolute_url}}" title="#" class="btn btn-primary"><span>Continue reading</span></a>
                                             </div>
 
                                             <footer class="footer">
                                                 <div class="row">
                                                     <div class="col-sm-12 col-lg-6 tags">
-                                                        <a href="post-detail-standard.html" title="#">#Walk</a>
-                                                        <a href="post-detail-standard.html" title="#">#Forest</a>
+                                                    {%for tag in b.tag%}
+                                                        <a href="/home/?q={{tag}}&c=Tags" title="#"><i class="fa fa-tags icon"></i>{{tag}}</a>
+                                                    {% endfor %}
+
                                                     </div>
                                                     <div class="col-sm-12 col-lg-6 moreInfo">
                                                         <div class="dropdown onHover">
@@ -166,139 +168,14 @@ body {
                                                                 <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
                                                             </ul>
                                                         </div>
-                                                        <div><span><i class="fa fa-eye"></i> 45</span></div>
-                                                        <div><span><i class="fa fa-comments"></i> 97</span></div>
+                                                        <div><span><i class="fa fa-comments"></i>{{b.responsecount}}</span></div>
                                                     </div>
                                                 </div>
                                             </footer>
                                         </div>
                                     </article>
                                 </div>
-
-                                <div class="col-xs-12 i">
-                                    <article class="article">
-                                        <div class="image">
-                                            <a href="post-detail-standard.html" title="#" class="favs">
-                                                <i class="fa fa-heart"></i>
-                                                <div class="count">54</div>
-                                            </a>
-                                            <a href="post-detail-standard.html" title="#">
-                                                <img src="{% static 'tmp/770x579-5.jpg' %}" alt="#" width="770" height="579" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="box">
-                                            <h3 class="title">
-                                                <a href="post-detail-standard.html" title="#">My weekend escape from the city</a>
-                                            </h3>
-                                            <div class="info">
-                                                <div>
-                                                    <span class="date">March 26, 2016</span>
-                                                </div>
-                                                <div>by <a href="post-detail-standard.html" title="#">Themees</a></div>
-                                                <div>in <a href="post-detail-standard.html" title="#">Nature</a></div>
-                                                <div>8 min read</div>
-                                            </div>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan eleifend magna. Curabitur scelerisque vitae augue ac dignissim.
-                                                Aliquam erat volutpat. Proin in ultricies ligula. Etiam rutrum porta lacus in posuere. vel tortor tempor risus ultricies bibendum...
-                                            </p>
-                                            <div class="btns text-center">
-                                                <a href="post-detail-standard.html" title="#" class="btn btn-primary"><span>Continue reading</span></a>
-                                            </div>
-
-                                            <footer class="footer">
-                                                <div class="row">
-                                                    <div class="col-sm-12 col-lg-6 tags">
-                                                        <a href="post-detail-standard.html" title="#">#Escape</a>
-                                                        <a href="post-detail-standard.html" title="#">#Cityt</a>
-                                                    </div>
-                                                    <div class="col-sm-12 col-lg-6 moreInfo">
-                                                        <div class="dropdown onHover">
-                                                            <div id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true" role="menu">
-                                                                <i class="fa fa-share-alt"></i>
-                                                            </div>
-
-                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div><span><i class="fa fa-eye"></i> 26</span></div>
-                                                        <div><span><i class="fa fa-comments"></i> 96</span></div>
-                                                    </div>
-                                                </div>
-                                            </footer>
-                                        </div>
-                                    </article>
-                                </div>
-
-                                <div class="col-xs-12 i">
-                                    <article class="article">
-                                        <div class="image">
-                                            <a href="post-detail-standard.html" title="#" class="favs">
-                                                <i class="fa fa-heart"></i>
-                                                <div class="count">36</div>
-                                            </a>
-                                            <a href="post-detail-standard.html" title="#">
-                                                <img src="{% static 'tmp/770x579-7.jpg' %}" alt="#" width="770" height="579" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="box">
-                                            <h3 class="title">
-                                                <a href="post-detail-standard.html" title="#">What a wonderful world!</a>
-                                            </h3>
-                                            <div class="info">
-                                                <div>
-                                                    <span class="date">March 26, 2016</span>
-                                                </div>
-                                                <div>by <a href="post-detail-standard.html" title="#">World</a></div>
-                                                <div>in <a href="post-detail-standard.html" title="#">Feelings</a></div>
-                                                <div>15 min read</div>
-                                            </div>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan eleifend magna. Curabitur scelerisque vitae augue ac dignissim.
-                                                Aliquam erat volutpat. Proin in ultricies ligula. Etiam rutrum porta lacus in posuere. vel tortor tempor risus ultricies bibendum...
-                                            </p>
-                                            <div class="btns text-center">
-                                                <a href="post-detail-standard.html" title="#" class="btn btn-primary"><span>Continue reading</span></a>
-                                            </div>
-
-                                            <footer class="footer">
-                                                <div class="row">
-                                                    <div class="col-sm-12 col-lg-6 tags">
-                                                        <a href="post-detail-standard.html" title="#">#Walk</a>
-                                                        <a href="post-detail-standard.html" title="#">#Forest</a>
-                                                    </div>
-                                                    <div class="col-sm-12 col-lg-6 moreInfo">
-                                                        <div class="dropdown onHover">
-                                                            <div id="dropdownMenu3" data-toggle="dropdown" aria-expanded="true" role="menu">
-                                                                <i class="fa fa-share-alt"></i>
-                                                            </div>
-
-                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-twitter"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-facebook"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-google-plus"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-linkedin"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-pinterest-p"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-tumblr"></i></a></li>
-                                                                <li><a href="post-detail-standard.html" title="#" class="i"><i class="fa fa-envelope"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div><span><i class="fa fa-eye"></i> 45</span></div>
-                                                        <div><span><i class="fa fa-comments"></i> 97</span></div>
-                                                    </div>
-                                                </div>
-                                            </footer>
-                                        </div>
-                                    </article>
-                                </div>
-
+                                {% endfor %}
                             </div>
                         </div>
                     </section>
@@ -481,6 +358,9 @@ body {
                                                 </button>
                                             {% endif  %}
                                         </form>
+                                        {% if request.user == story.author.user %}
+                                        <a href="{% url 'story:update' story.title|slugify %}" title="#" class="btn btn-color-full"><span>Update</span></a>
+                                        {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -506,45 +386,21 @@ body {
                             <h2>Similar Stories</h2>
 
                             <div class="asideCarousel js-aside-carousel">
+                            {% for b,s in story.get_similar_stories|slice:":6" %}
                                 <div class="i">
                                     <div class="c">
                                         <article class="article">
-                                            <a href="post-detail-standard.html" title="#" class="image">
+                                            <a href="" title="#" class="image">
                                                 <img src="{% static 'tmp/290x193-1.jpg' %}" alt="#" width="290" height="193" class="img-responsive">
                                             </a>
                                             <h3 class="title">
-                                                <a href="post-detail-standard.html" title="#">Nothing ever seems straightforward in Venice, least of all its romances.</a>
-                                            </h3>
-                                            <div class="info">March 22, 2016</div>
+                                                <a href="" title="#">{{b.title}}</a>
+                                            </h3><div class="info">{{b.created_at|date}}</div>
+                                            <div class="info">{{b.description|truncatewords:50}}</div>
                                         </article>
                                     </div>
                                 </div>
-                                <div class="i">
-                                    <div class="c">
-                                        <article class="article">
-                                            <a href="post-detail-standard.html" title="#" class="image">
-                                                <img src="{% static 'tmp/290x193-3.jpg' %}" alt="#" width="290" height="193" class="img-responsive">
-                                            </a>
-                                            <h3 class="title">
-                                                <a href="post-detail-standard.html" title="#">Monday Morning Cup of Coffee</a>
-                                            </h3>
-                                            <div class="info">March 22, 2016</div>
-                                        </article>
-                                    </div>
-                                </div>
-                                <div class="i">
-                                    <div class="c">
-                                        <article class="article">
-                                            <a href="post-detail-standard.html" title="#" class="image">
-                                                <img src="{% static 'tmp/290x193-2.jpg' %}" alt="#" width="290" height="193" class="img-responsive">
-                                            </a>
-                                            <h3 class="title">
-                                                <a href="post-detail-standard.html" title="#">I love public transportation</a>
-                                            </h3>
-                                            <div class="info">March 22, 2016</div>
-                                        </article>
-                                    </div>
-                                </div>
+                            {% endfor %}
                             </div>
                         </div>
                     </div>
